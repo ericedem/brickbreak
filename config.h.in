@@ -1,0 +1,2 @@
+#define brickbreak_VERSION_MAJOR @brickbreak_VERSION_MAJOR@
+#define brickbreak_VERSION_MINOR @brickbreak_VERSION_MINOR@

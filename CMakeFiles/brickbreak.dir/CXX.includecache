@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/ericedem/git/brick-break/src/Game.cpp
+SDL2/SDL.h
+-
+SDL2_image/SDL_image.h
+-
+Game.hpp
+/Users/ericedem/git/brick-break/src/Game.hpp
+
+/Users/ericedem/git/brick-break/src/Game.hpp
+stdio.h
+-
+SDL2/SDL.h
+-
+
+/Users/ericedem/git/brick-break/src/main.cpp
+SDL2/SDL.h
+-
+stdio.h
+-
+Game.hpp
+/Users/ericedem/git/brick-break/src/Game.hpp
+stdio.h
+-
+
