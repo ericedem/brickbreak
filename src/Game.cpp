@@ -1,11 +1,3 @@
-//
-//  Game.cpp
-//  sdl-tutorial
-//
-//  Created by Eric Edem on 7/8/17.
-//  Copyright © 2017 Eric Edem. All rights reserved.
-//
-
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include "Game.hpp"
@@ -31,7 +23,6 @@ bool Game::init() {
         return false;
     }
 
-    // TODO: Is this the right thing here?
     if(!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1")) {
         printf( "Warning: Linear texture filtering not enabled!" );
     }
