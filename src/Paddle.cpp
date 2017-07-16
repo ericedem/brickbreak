@@ -1,7 +1,7 @@
 #include "Paddle.hpp"
 #include <stdio.h>
 
-Paddle::Paddle() : width(64), height(16), x(500), y(0), xvel(0), maxvel(120) {}
+Paddle::Paddle() : width(64), height(16), x(500), y(0), xvel(0), maxvel(240) {}
 
 void Paddle::draw(SDL_Renderer* renderer) {
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
