@@ -26,6 +26,24 @@ void Paddle::stop() {
   xvel = 0;
 }
 
+/*
+The general collision behavior for the paddle is that it will stop moving and
+restrict itself to within the boundary.
+*/
+void Paddle::collideLeft(float bound) {
+  if (x < bound) {
+    xvel = 0;
+    x = bound;
+  }
+}
+
+void Paddle::collideRight(float bound) {
+  if (x + width > bound) {
+    xvel = 0;
+    x = bound - width;
+  }
+}
+
 void Paddle::move(double time_delta) {
   x += xvel * time_delta;
 }

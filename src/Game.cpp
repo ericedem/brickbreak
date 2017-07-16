@@ -124,6 +124,10 @@ void Game::gameLoop(double tdelta) {
     // -- Position Updates -----------------------------------------------------
     p.move(tdelta);
 
+    // -- Collision Detection --------------------------------------------------
+    p.collideRight(SCREEN_WIDTH);
+    p.collideLeft(0);
+
     // -- Drawing --------------------------------------------------------------
     // Clear window to black
     SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);

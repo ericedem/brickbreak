@@ -11,6 +11,8 @@ public:
   void go_right();
   void move(double time_delta);
   void stop();
+  void collideRight(float bound);
+  void collideLeft(float bound);
 
 private:
   double x;
