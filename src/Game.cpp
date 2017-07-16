@@ -3,6 +3,7 @@
 #include <chrono>
 
 #include "Game.hpp"
+#include "Ball.hpp"
 #include "Paddle.hpp"
 
 typedef std::chrono::steady_clock Clock;
@@ -77,6 +78,7 @@ void Game::gameLoop(double tdelta) {
     static SDL_Event event;
 
     static Paddle p = Paddle();
+    static Ball b = Ball();
 
     static bool left_pressed = false;
     static bool right_pressed = false;
@@ -134,6 +136,7 @@ void Game::gameLoop(double tdelta) {
     SDL_RenderClear(_renderer);
 
     p.draw(_renderer);
+    b.draw(_renderer);
 
     // Paint the screen baby
     SDL_RenderPresent(_renderer);
