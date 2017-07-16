@@ -14,6 +14,7 @@ class Ball {
     double x;
     double y;
     double radius;
+    double angle;
 };
 
 #endif

@@ -2,6 +2,8 @@
 #include <SDL2/SDL.h>
 #include "Ball.hpp"
 
+// TODO: move this to globals somewhere
+#define PI 3.14159
 
 void drawCircle(SDL_Renderer* renderer, int x, int y, int r) {
   for (int w = -r; w < r; w++) {
@@ -13,9 +15,15 @@ void drawCircle(SDL_Renderer* renderer, int x, int y, int r) {
   }
 }
 
-Ball::Ball() : x(500), y(500), radius(10), vel(0) {}
+Ball::Ball() : x(500), y(500), radius(10), vel(120), angle(PI/4) {}
 
 void Ball::draw(SDL_Renderer* renderer) {
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   drawCircle(renderer, x, y, radius);
+}
+
+// 0 degrees points right
+void Ball::move(double time_delta) {
+  x += vel * time_delta * cos(angle);
+  y += vel * time_delta * sin(angle);
 }

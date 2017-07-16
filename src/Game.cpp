@@ -125,6 +125,7 @@ void Game::gameLoop(double tdelta) {
 
     // -- Position Updates -----------------------------------------------------
     p.move(tdelta);
+    b.move(tdelta);
 
     // -- Collision Detection --------------------------------------------------
     p.collideRight(SCREEN_WIDTH);
