@@ -1,11 +1,3 @@
-//
-//  Game.hpp
-//  sdl-tutorial
-//
-//  Created by Eric Edem on 7/8/17.
-//  Copyright © 2017 Eric Edem. All rights reserved.
-//
-
 #ifndef Game_hpp
 #define Game_hpp
 
@@ -18,20 +10,20 @@ public:
 
 private:
     static bool init();
-    static void gameLoop();
+    static void gameLoop(double tdelta);
     static void close();
-    
+
     enum GameState {
         Uninitialized,
         Playing,
         Exiting
     };
-    
+
     static GameState _gameState;
-    
+
     static SDL_Window* _window;
     static SDL_Renderer* _renderer;
-    
+
     const static int SCREEN_WIDTH = 1024;
     const static int SCREEN_HEIGHT = 768;
 };

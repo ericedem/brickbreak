@@ -1,6 +1,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
+#include <chrono>
+
 #include "Game.hpp"
+#include "Paddle.hpp"
+
+typedef std::chrono::steady_clock Clock;
 
 void Game::start(void) {
     if(_gameState != Uninitialized) {
@@ -10,8 +15,19 @@ void Game::start(void) {
     bool initialized = init();
     if (!initialized) return;
 
+    Clock::time_point last_time = Clock::now();
+    Clock::time_point current_time = Clock::now();
+    Clock::duration time_span;
+    double tdelta;
+
     while(_gameState != Game::Exiting) {
-        gameLoop();
+        // Manage time so that the loop can focus on logic
+        last_time = current_time;
+        current_time = Clock::now();
+        time_span = current_time - last_time;
+        tdelta = double(time_span.count()) * Clock::period::num / Clock::period::den;
+
+        gameLoop(tdelta);
     }
 
     close();
@@ -57,15 +73,66 @@ bool Game::init() {
     return true;
 };
 
-void Game::gameLoop() {
-    SDL_Event e;
+void Game::gameLoop(double tdelta) {
+    static SDL_Event event;
 
-    //Handle events on queue
-    while( SDL_PollEvent( &e ) != 0 ) {
-        if(e.type == SDL_QUIT) {
-            _gameState = Game::Exiting;
+    static Paddle p = Paddle();
+
+    static bool left_pressed = false;
+    static bool right_pressed = false;
+
+    // -- Handle Control logic -------------------------------------------------
+    while( SDL_PollEvent( &event ) != 0 ) {
+        switch(event.type) {
+            case SDL_QUIT:
+                _gameState = Game::Exiting;
+                break;
+            case SDL_KEYDOWN:
+                switch( event.key.keysym.sym ){
+                    case SDLK_LEFT:
+                        left_pressed = true;
+                        break;
+                    case SDLK_RIGHT:
+                        right_pressed = true;
+                        break;
+                }
+                break;
+            case SDL_KEYUP:
+                switch( event.key.keysym.sym ){
+                    case SDLK_LEFT:
+                        left_pressed = false;
+                        break;
+                    case SDLK_RIGHT:
+                        right_pressed = false;
+                        break;
+                }
+                break;
         }
     }
+
+
+    if (left_pressed && right_pressed) {
+        p.stop();
+    } else if (left_pressed) {
+        p.go_left();
+    } else if (right_pressed) {
+        p.go_right();
+    } else {
+        p.stop();
+    }
+
+    // -- Position Updates -----------------------------------------------------
+    p.move(tdelta);
+
+    // -- Drawing --------------------------------------------------------------
+    // Clear window to black
+    SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
+    SDL_RenderClear(_renderer);
+
+    p.draw(_renderer);
+
+    // Paint the screen baby
+    SDL_RenderPresent(_renderer);
 };
 
 void Game::close() {
