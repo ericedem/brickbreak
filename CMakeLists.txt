@@ -26,10 +26,12 @@ set(CMAKE_MODULE_PATH
 if (APPLE)
 find_library(SDL2 SDL2)
 find_library(SDL2_IMAGE SDL2_image)
+find_library(SDL2_TTF SDL2_ttf)
 target_link_libraries(
   ${EXECUTABLE_NAME}
   ${SDL2}
   ${SDL2_IMAGE}
+  ${SDL2_TTF}
 )
 endif ()
 

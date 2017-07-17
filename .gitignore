@@ -4,4 +4,5 @@ Makefile
 cmake_install.cmake
 config.h
 brickbreak
+brickbreak.dSYM
 .vscode
