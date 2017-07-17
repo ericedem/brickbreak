@@ -6,6 +6,7 @@
 class Paddle {
 public:
   Paddle();
+  Paddle(int x, int y);
   void draw(SDL_Renderer* renderer);
   void go_left();
   void go_right();

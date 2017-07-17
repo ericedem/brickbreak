@@ -77,8 +77,9 @@ bool Game::init() {
 void Game::gameLoop(double tdelta) {
     static SDL_Event event;
 
-    static Paddle p = Paddle();
-    static Ball b = Ball();
+    // TODO: textures / sizes etc. should probably all be defined at this level
+    static Paddle p = Paddle(SCREEN_WIDTH/2, SCREEN_HEIGHT-16);
+    static Ball b = Ball(SCREEN_WIDTH/2, SCREEN_HEIGHT-30, 120, -PI/4);
 
     static bool left_pressed = false;
     static bool right_pressed = false;
@@ -112,7 +113,6 @@ void Game::gameLoop(double tdelta) {
         }
     }
 
-
     if (left_pressed && right_pressed) {
         p.stop();
     } else if (left_pressed) {
@@ -128,8 +128,11 @@ void Game::gameLoop(double tdelta) {
     b.move(tdelta);
 
     // -- Collision Detection --------------------------------------------------
+    // TODO: make this a constant somewhere
+    static SDL_Rect bounds = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     p.collideRight(SCREEN_WIDTH);
     p.collideLeft(0);
+    b.collideBounds(bounds);
 
     // -- Drawing --------------------------------------------------------------
     // Clear window to black
